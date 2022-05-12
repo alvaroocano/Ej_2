@@ -4,9 +4,15 @@
 	var xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
+			//console.log(xhr.responseText);
 			var obj_json=JSON.parse(xhr.responseText);
-			var jj=obj_json[2].title;
-			console.log(jj);
+			var obj_jvsc=[];
+			for(i=0; i<obj_json["@graph"].length; i++){
+		    obj_jvsc[i]=new Object();
+			obj_jvsc[i].title=obj_json["@graph"][i].title;
+			obj_jvsc[i].address=obj_json["@graph"][i].address["street-address"];
+		}
+		console.log(obj_jvsc);
 		}
 	}
 	xhr.open("GET","https://run.mocky.io/v3/4d72fb15-e674-47d3-99fb-e4a4d10e116e");
