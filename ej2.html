@@ -12,7 +12,26 @@
 			obj_jvsc[i].title=obj_json["@graph"][i].title;
 			obj_jvsc[i].address=obj_json["@graph"][i].address["street-address"];
 		}
-		console.log(obj_jvsc);
+
+		pintarTabla(obj_json);
+
+		function pintarTabla(obj_json) {
+			var tabla=document.createElement("table");
+			document.getElementsByTagName("div")[0].appendChild(tabla);
+			for(i=0;i<obj_json["@graph"].length;i++){
+			var fila=document.createElement("tr");
+			document.getElementsByTagName("table")[0].appendChild(fila);
+			var titles=obj_json["@graph"][i].title;
+			var addresses=obj_json["@graph"][i].address["street-address"];
+			var col_title=document.createElement("td");
+			col_title.innerHTML=titles;
+			var col_address=document.createElement("td");
+			col_address.innerHTML=addresses;
+			fila.appendChild(col_title);
+			fila.appendChild(col_address);
+			}
+		}
+
 		}
 	}
 	xhr.open("GET","https://run.mocky.io/v3/4d72fb15-e674-47d3-99fb-e4a4d10e116e");
@@ -27,4 +46,4 @@
 <script>
 
 </script>
-<html>
+</html>
